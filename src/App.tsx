@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import ListBreweries from './components/listBreweries';
 
 const App = () => {
   return (
-    <div>App</div>
+    <div>
+      <ListBreweries />
+    </div>
   )
-}
+};
 
-export default App
+export default App;
