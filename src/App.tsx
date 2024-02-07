@@ -1,10 +1,9 @@
-import React from 'react';
-import ListBreweries from './components/listBreweries';
+import BreweriesList from './components/breweriesList/BreweriesList';
 
 const App = () => {
   return (
     <div>
-      <ListBreweries />
+      <BreweriesList />
     </div>
   )
 };
