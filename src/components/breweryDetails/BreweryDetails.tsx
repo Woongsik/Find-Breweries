@@ -24,7 +24,7 @@ export default function BreweryDetails() {
             {Object.entries(data).map(([key, value], i) => {
               if (key !== "name" && key !== 'id' && value) {
                 return (
-                  <li>{key}: {value}</li>
+                  <li key={key}>{key}: {value}</li>
                 );  
               }
               return '';
