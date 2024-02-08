@@ -1,5 +1,7 @@
+import { Link } from 'react-router-dom';
 import { Brewery } from '../../misc/types/Brewery';
 import { useFetch } from '../../hooks/useFetch';
+import './BreweriesList.css';
 
 export default function BreweriesList() {
   const url: string = "https://api.openbrewerydb.org/v1/breweries";
@@ -15,21 +17,16 @@ export default function BreweriesList() {
   
   return (
     <div>
-      List of Breweries
+      <h1>List of Breweries</h1>
       <ol>
       {data.map((brewery) => 
         <li key={brewery.id}>
-          {brewery.name}
-          <ul>
-            {Object.entries(brewery).map(([key, value], i) => {
-              if (key !== "name" && key !== 'id' && value) {
-                return (
-                  <li key={`${brewery.id}_${key}`}>{key}: {value}</li>
-                );  
-              }
-              return '';
-            })}
-          </ul>
+          <div>{brewery.name}</div>
+          <div>
+            <button>
+              <Link to={`/brewery/${brewery.id}`}>Details</Link>
+            </button>
+          </div>
         </li>)
       }
       </ol>
