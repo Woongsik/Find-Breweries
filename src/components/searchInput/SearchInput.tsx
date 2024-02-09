@@ -2,15 +2,15 @@ import React, { useCallback, useState } from 'react';
 import './SearchInput.css';
 
 type Props = {
-  searchChanged: Function
+  textChanged: Function
 }
 export default function SearchInput(props: Props) {
   const [searchPhrase, setSearchPhrase] = useState<string>('');
   
   // debounce manually
-  const debounce = (callback: Function, delay: number) => {
+  const debounce = (callback: Function) => {
     let timeout: any;
-    return (value: string) => {
+    return (value: string, delay: number = 1000) => {
       clearTimeout(timeout);
       timeout = setTimeout(() => {
         callback(value);
@@ -19,16 +19,16 @@ export default function SearchInput(props: Props) {
   }
 
   const submitInputValue = (value: string) => {
-    console.log('submit the input:', value);
-    props.searchChanged(value);
+    props.textChanged(value);
   }
 
-  const debounced = debounce(submitInputValue, 1000);
-  const debouncedCallback = useCallback((value: string) => debounced(value), []);
+  const debounced = debounce(submitInputValue);
+  // Optimization useCallback
+  const debouncedCallback = useCallback((value: string, delay: number) => debounced(value, delay), []);
 
-  const setNewSearch = (value: string) => {
+  const setNewSearch = (value: string, delay: number = 1000) => {
     setSearchPhrase(value);
-    debouncedCallback(value);
+    debouncedCallback(value, delay);
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,7 +38,7 @@ export default function SearchInput(props: Props) {
 
   const clear = () => {
     console.log('Clear');
-    setNewSearch('');
+    setNewSearch('', 0);
   }
 
   return (

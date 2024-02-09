@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <div className="home-container">
       <div>
-      <SearchInput searchChanged={(newSearch: string) => setSearchPhrase(newSearch)} />
+      <SearchInput textChanged={(newSearch: string) => setSearchPhrase(newSearch)} />
       <BreweriesList searchPhrase={searchPhrase}/>
       </div>
     </div>

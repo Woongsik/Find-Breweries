@@ -11,7 +11,7 @@ export default function BreweriesList(props: Props) {
   const { searchPhrase } = props;
   let url: string = "https://api.openbrewerydb.org/v1/breweries";
   if (searchPhrase && searchPhrase.length > 0) {
-    url = `https://api.openbrewerydb.org/v1/breweries/search?query=${searchPhrase}`;
+    url += `?by_name=${searchPhrase}`;
   }
 
   const { data, loading, error } = useFetch<Brewery>(url);

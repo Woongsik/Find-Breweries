@@ -7,6 +7,7 @@ export function useFetch<T>(url: string) {
   const [error, setError] = useState<string>("");
 
   useEffect(() => {
+    console.log('Fetch url:', url);
     axios
       .get(url)
       .then((response: AxiosResponse<T[]>) => {
