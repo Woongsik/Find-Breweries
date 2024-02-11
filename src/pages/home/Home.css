@@ -1,5 +1,14 @@
-.home-container {
+.home {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.home__body {
+  min-height: 70vh; 
+  min-width: 75vw;
+}
+
+.home__body-title {
+  text-align: center;
 }

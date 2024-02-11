@@ -4,29 +4,31 @@ import { useFetch } from '../../hooks/useFetch';
 import './BreweriesList.css';
 
 type Props = {
-  searchPhrase: string
+  url: string
 }
 
 export default function BreweriesList(props: Props) {
-  const { searchPhrase } = props;
-  let url: string = "https://api.openbrewerydb.org/v1/breweries";
-  if (searchPhrase && searchPhrase.length > 0) {
-    url += `?by_name=${searchPhrase}`;
-  }
-
+  const { url } = props;
   const { data, loading, error } = useFetch<Brewery>(url);
 
   if (loading) {
-    return <p>Loading all breweries {searchPhrase.length > 0 ? `by ${searchPhrase}` : ``}....</p>;
+    return (
+      <div className="breweries-list">
+        <p>Loading breweries....</p>
+      </div>   
+      );
   }
 
   if (error) {
-    return <p>Error: { error }</p>
+    return (
+      <div className="breweries-list">
+        <p>Error: { error }</p>
+      </div>
+    )
   }
   
   return (
-    <div>
-      <h1>List of Breweries {searchPhrase.length > 0 ? `by ${searchPhrase}` : ``}</h1>
+    <div className="breweries-list">
       <ol>
       {data.map((brewery) => 
         <li key={brewery.id}>

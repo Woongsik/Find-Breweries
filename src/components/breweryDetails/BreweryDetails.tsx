@@ -19,7 +19,7 @@ export default function BreweryDetails() {
   if (data) {
     return (
       <div>
-        <h1>Details page of {data.name}</h1>
+        <h1>{data.name}</h1>
         <ul>
             {Object.entries(data).map(([key, value], i) => {
               if (key !== "name" && key !== 'id' && value) {
