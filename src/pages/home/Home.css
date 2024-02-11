@@ -1,13 +1,11 @@
 .home {
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .home__body {
-  min-height: 70vh; 
-  min-width: 75vw;
-}
+  max-width: 45%;
+  min-width: 500px;}
 
 .home__body-title {
   text-align: center;

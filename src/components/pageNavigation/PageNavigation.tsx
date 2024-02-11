@@ -1,8 +1,18 @@
-import React from 'react'
+import React from 'react';
+import { 
+  Pagination, 
+  FormControl, 
+  InputLabel, 
+  Select, 
+  MenuItem, 
+  SelectChangeEvent, 
+  Grid,
+  ButtonGroup,
+  Button
+} from '@mui/material';
 
 type Props = {
-  showNext: Function,
-  showPrev: Function,
+  changePage: Function,
   changeItemsPerPage: Function,
   changeSort: Function,
   currentPage: number,
@@ -17,56 +27,59 @@ export enum Sort {
 
 
 export default function PageNavigation(props: Props) {
-  const { showNext, showPrev, currentPage, currentPerPage, currentSort } = props;
+  const { currentPage, currentPerPage, currentSort } = props;
 
-  const handlePerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleSelectChange = (e: SelectChangeEvent) => {
     const { value } = e.target;
-    props.changeItemsPerPage(parseInt(value));
-  }
+    props.changeItemsPerPage(parseInt(value));  
+  };
+
+  const handlePageChange = (e: React.ChangeEvent<unknown>, value: number) => {
+    props.changePage(value);
+  };
 
   return (
-    <div>
-      <button 
-        disabled={currentPage < 2} 
-        onClick={() => showPrev()}>
-        Prev
-      </button>
-      <h1>{currentPage}</h1>
-      <button
-        onClick={() => showNext()}>
-        Next
-      </button>
+    <Grid 
+      container 
+      justifyContent="space-between"
+      alignItems="center"
+      sx={{ my: 5, backgroundColor: 'white', borderTop: '1px solid gray', position: 'sticky', bottom: '0'}}>
+      <Grid item>
+        <Pagination count={10} color="primary" page={currentPage} onChange={handlePageChange} />
+      </Grid>
+      
+      <Grid item>
+        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+          <InputLabel id="items-per-page-label">Items per Page</InputLabel>
+          <Select
+            labelId="items-per-page-label"
+            value={currentPerPage.toString()}
+            label="Items per Page"
+            onChange={handleSelectChange}>
 
-      <div>
-      <label>Items per page: </label>
+            <MenuItem value={200}>200</MenuItem>
+            <MenuItem value={100}>100</MenuItem>
+            <MenuItem value={50}>50</MenuItem>
+            <MenuItem value={30}>30</MenuItem>
+            <MenuItem value={10}>10</MenuItem>
+          </Select>
+        </FormControl>
+      </Grid>
 
-      <select 
-        name="perPage" 
-        id="perPage" 
-        onChange={handlePerPageChange}
-        value={currentPerPage}>
-        <option value="200">200</option>
-        <option value="100" >100</option>
-        <option value="50" >50</option>
-        <option value="30" >30</option>
-        <option value="10" >10</option>
-      </select>
-      </div>
-
-      <div>
-        Sort: {currentSort}
-        <button 
-          disabled={currentSort === Sort.ASC}
-          onClick={() => props.changeSort(Sort.ASC)}>
-          Acs
-        </button>
-        <button 
-          disabled={currentSort === Sort.DESC}
-          onClick={() => props.changeSort(Sort.DESC)}>
-          Desc
-        </button>
-      </div>
-    </div>
-    
+      <Grid item>
+        <ButtonGroup variant="contained" aria-label="Basic button group">
+          <Button 
+            onClick={() => props.changeSort(Sort.ASC)}
+            disabled={currentSort === Sort.ASC}>
+            ASC
+          </Button>
+          <Button
+            onClick={() => props.changeSort(Sort.DESC)}
+            disabled={currentSort === Sort.DESC}>
+            DESC
+          </Button>
+        </ButtonGroup>
+      </Grid>
+    </Grid>
   )
 }

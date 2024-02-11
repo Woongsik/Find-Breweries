@@ -1,4 +1,7 @@
 import React, { useCallback, useState } from 'react';
+import { Box, FormControl, TextField, Button, IconButton } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
+import CancelIcon from '@mui/icons-material/Cancel';
 import './SearchInput.css';
 
 type Props = {
@@ -42,14 +45,25 @@ export default function SearchInput(props: Props) {
   }
 
   return (
-    <div className="search">
-      <input
-        value={searchPhrase}
-        onChange={handleChange}
-        className="search__input" />
-        <button onClick={clear}>
-          Clear  
-        </button> 
-    </div>
+    <FormControl fullWidth>
+      <Box sx={{ display: 'flex', alignItems: 'center', margin: '5px 10px' }}>
+        <SearchIcon 
+          sx={{ color: 'action.active', mr: 2, mt: 1.5 }} />
+        <TextField 
+          fullWidth
+          label="Search breweries by name" 
+          variant="standard" 
+          value={searchPhrase}
+          onChange={handleChange} />
+
+        <IconButton 
+          onClick={clear}
+          color="default" 
+          aria-label="Clear the search"
+          sx={{ mt: 1.5 }}>
+          <CancelIcon />
+        </IconButton>
+      </Box>
+    </FormControl>
   )
 };
