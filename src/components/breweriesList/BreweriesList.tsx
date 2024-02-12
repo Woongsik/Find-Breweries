@@ -15,13 +15,16 @@ import { useFetch } from '../../hooks/useFetch';
 import './BreweriesList.css';
 
 type Props = {
-  url: string
+  url: string,
+  showNavigation: Function
 }
 
 export default function BreweriesList(props: Props) {
   const { url } = props;
   const { data, loading, error } = useFetch<Brewery>(url);
-
+  
+  props.showNavigation(data && data.length > 0);
+  
   if (loading) {
     return (
       <div className="breweries-list">
@@ -37,9 +40,20 @@ export default function BreweriesList(props: Props) {
       </div>
     )
   }
+
+  if (!data || data.length == 0) {
+    return (
+      <div className="breweries-list">
+        <p>No data with your search! try again...</p>
+      </div>
+      )
+  }
   
   return (
     <Grid container sx={{ my: 5, minHeight: '50vh' }}>
+      { loading ? <div>Loading ...</div> : '' }
+
+
       {data.map((brewery: Brewery) => 
         <Grid item key={brewery.id} sx={{ width: '100%' }}>
           <Card sx={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid gray' }}>

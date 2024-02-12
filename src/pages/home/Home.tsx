@@ -19,6 +19,7 @@ export default function Home() {
   const [page, setPage] = useState<number>(basePage);
   const [perPage, setPerPage] = useState<number>(baseItemsPerPage);
   const [sort, setSort] = useState<Sort>(baseSort);
+  const [showPageNav, setShowPageNav] = useState<boolean>(true);
 
   const changeUrl = (searchPhrase: string, page: number = basePage, itemsPerPage: number = baseItemsPerPage, sort: string = baseSort) => {
     let url: string = baseUrl;
@@ -60,6 +61,10 @@ export default function Home() {
     changeUrl(searchPhrase, page, perPage, sort);
   }
 
+  const showPageNavigation = (show: boolean) => {
+    setShowPageNav(show);
+  }
+
   return (
     <div className="home">
       <div className="home__contents">
@@ -68,13 +73,14 @@ export default function Home() {
         <SortButtons 
           changeSort={changeSort}
           currentSort={sort} />
-        <BreweriesList url={url} />   
-        <PageNavigation 
+        <BreweriesList url={url}
+                       showNavigation={showPageNavigation} />   
+        {showPageNav ? <PageNavigation 
           changePage={changePage}
           changeItemsPerPage={changeItemsPerPage}
           currentPage={page}
           currentPerPage={perPage}
-           />
+           /> : ''}
       </div>
     </div>
   )
