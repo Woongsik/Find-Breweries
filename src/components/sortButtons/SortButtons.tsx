@@ -1,5 +1,9 @@
 import React from 'react';
-import { Grid, ButtonGroup, Button } from '@mui/material';
+import { 
+  Grid, 
+  ButtonGroup, 
+  Button 
+} from '@mui/material';
 
 type Props = {
   changeSort: Function,

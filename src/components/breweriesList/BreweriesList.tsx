@@ -1,8 +1,15 @@
 import { Link } from 'react-router-dom';
-import { Grid, Card, CardContent, Typography, CardActions, Button, Chip } from '@mui/material';
+import { 
+  Grid,
+  Card, 
+  CardContent, 
+  Typography, 
+  CardActions, 
+  Button,   
+  Chip } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
-import { getColorByType } from '../../utils/ColorByBreweryType';
 
+import { getColorByType } from '../../utils/ColorByBreweryType';
 import { Brewery } from '../../misc/types/Brewery';
 import { useFetch } from '../../hooks/useFetch';
 import './BreweriesList.css';
@@ -32,7 +39,7 @@ export default function BreweriesList(props: Props) {
   }
   
   return (
-    <Grid container sx={{ my: 5 }}>
+    <Grid container sx={{ my: 5, minHeight: '50vh' }}>
       {data.map((brewery: Brewery) => 
         <Grid item  sx={{ width: '100%' }}>
           <Card sx={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid gray' }}>

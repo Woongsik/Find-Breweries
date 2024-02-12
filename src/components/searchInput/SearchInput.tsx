@@ -1,5 +1,11 @@
 import React, { useCallback, useState } from 'react';
-import { Box, FormControl, TextField, Button, IconButton } from '@mui/material';
+import * as lodash from 'lodash';
+import { 
+  Box, 
+  FormControl, 
+  TextField, 
+  IconButton 
+} from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import CancelIcon from '@mui/icons-material/Cancel';
 import './SearchInput.css';
@@ -26,8 +32,10 @@ export default function SearchInput(props: Props) {
   }
 
   const debounced = debounce(submitInputValue);
+  // const debounced = lodash.debounce(submitInputValue, 1000);
+  
   // Optimization useCallback
-  const debouncedCallback = useCallback((value: string, delay: number) => debounced(value, delay), []);
+  const debouncedCallback = useCallback((value: string, delay: number) => debounced(value), []);
 
   const setNewSearch = (value: string, delay: number = 1000) => {
     setSearchPhrase(value);

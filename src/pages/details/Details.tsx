@@ -1,10 +1,11 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+
+import PageTitle from '../../components/pageTitle/PageTitle';
 import BreweryDetails from '../../components/breweryDetails/BreweryDetails';
 import { useFetchDetail } from '../../hooks/useFetchDetail';
 import { Brewery } from '../../misc/types/Brewery';
 import './Details.css';
-import PageTitle from '../../components/pageTitle/PageTitle';
 
 export default function Details() {
   const url: string = "https://api.openbrewerydb.org/v1/breweries";

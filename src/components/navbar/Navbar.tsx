@@ -1,7 +1,16 @@
 import React from 'react';
-import { Box, Typography, Divider, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
-import './Navbar.css';
 import { Link } from 'react-router-dom';
+import { 
+  Box, 
+  Typography,
+  Divider, 
+  List, 
+  ListItem, 
+  ListItemButton, 
+  ListItemText 
+} from '@mui/material';
+
+import './Navbar.css';
 
 export default function Navbar() {
   return (

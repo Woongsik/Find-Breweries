@@ -1,5 +1,15 @@
 import { Link } from 'react-router-dom';
-import { Grid, Card, CardActionArea, CardMedia, CardContent, Typography, CardActions, Button, Chip } from '@mui/material';
+import { 
+  Grid, 
+  Card, 
+  CardActionArea, 
+  CardMedia, 
+  CardContent, 
+  Typography, 
+  CardActions, 
+  Button, 
+  Chip 
+} from '@mui/material';
 
 import { Brewery } from '../../misc/types/Brewery';
 import { getColorByType } from '../../utils/ColorByBreweryType';
