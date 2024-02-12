@@ -8,13 +8,16 @@ import {
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import CancelIcon from '@mui/icons-material/Cancel';
+
 import './SearchInput.css';
 
 type Props = {
   textChanged: Function
 }
+
 export default function SearchInput(props: Props) {
   const [searchPhrase, setSearchPhrase] = useState<string>('');
+  const [taskInQue, setTaskInQue] = useState<any>(undefined);
   
   // debounce manually
   const debounce = (callback: Function) => {
@@ -31,20 +34,30 @@ export default function SearchInput(props: Props) {
     props.textChanged(value);
   }
 
+  /* line 37 to 42 and line 46 about debounce with useCallback  */
   const debounced = debounce(submitInputValue);
   // const debounced = lodash.debounce(submitInputValue, 1000);
   
   // Optimization useCallback
-  const debouncedCallback = useCallback((value: string, delay: number) => debounced(value), []);
+  // const debouncedCallback = useCallback((value: string) => debounced(value), []);
 
   const setNewSearch = (value: string, delay: number = 1000) => {
     setSearchPhrase(value);
-    debouncedCallback(value, delay);
+    // debouncedCallback(value, delay); => This is not working as expected
+
+    // Alternative
+    if (taskInQue) {
+      clearTimeout(taskInQue);
+    }
+
+    setTaskInQue(setTimeout(() => {
+      submitInputValue(value);
+    }, delay));
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setNewSearch(value);
+    setNewSearch(value, 1000);
   }
 
   const clear = () => {
