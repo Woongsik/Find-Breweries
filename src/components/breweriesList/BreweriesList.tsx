@@ -41,7 +41,7 @@ export default function BreweriesList(props: Props) {
   return (
     <Grid container sx={{ my: 5, minHeight: '50vh' }}>
       {data.map((brewery: Brewery) => 
-        <Grid item  sx={{ width: '100%' }}>
+        <Grid item key={brewery.id} sx={{ width: '100%' }}>
           <Card sx={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid gray' }}>
             <CardContent>
               <Typography gutterBottom variant="h6" component="div">
