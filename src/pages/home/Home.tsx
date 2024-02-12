@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+
 import PageTitle from '../../components/pageTitle/PageTitle';
 import SearchInput from '../../components/searchInput/SearchInput';
 import BreweriesList from '../../components/breweriesList/BreweriesList';
-import PageNavigation, { Sort } from '../../components/pageNavigation/PageNavigation';
+import PageNavigation from '../../components/pageNavigation/PageNavigation';
+import SortButtons, { Sort } from '../../components/sortButtons/SortButtons';
 import './Home.css';
 
 export default function Home() {
@@ -60,17 +62,19 @@ export default function Home() {
 
   return (
     <div className="home">
-      <div className="home__body">
+      <div className="home__contents">
         <PageTitle title="Breweries list" />
         <SearchInput textChanged={changeUrlByName} />
+        <SortButtons 
+          changeSort={changeSort}
+          currentSort={sort} />
         <BreweriesList url={url} />   
         <PageNavigation 
           changePage={changePage}
           changeItemsPerPage={changeItemsPerPage}
-          changeSort={changeSort}
           currentPage={page}
           currentPerPage={perPage}
-          currentSort={sort} />
+           />
       </div>
     </div>
   )

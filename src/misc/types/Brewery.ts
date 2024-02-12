@@ -1,7 +1,14 @@
+export enum BreweryType {
+  BrewPub = "brewpub",
+  Large = "large",
+  Contract = "contract",
+  Closed = "closed"
+} 
+
 export type Brewery = {
   id: string;
   name: string;
-  brewery_type: string;
+  brewery_type: BreweryType;
   address_1: string;
   address_2: string;
   address_3: string;

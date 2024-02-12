@@ -1,36 +1,46 @@
-import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { Grid, Card, CardActionArea, CardMedia, CardContent, Typography, CardActions, Button, Chip } from '@mui/material';
 
-import { useFetchDetail } from '../../hooks/useFetchDetail';
 import { Brewery } from '../../misc/types/Brewery';
+import { getColorByType } from '../../utils/ColorByBreweryType';
 
-export default function BreweryDetails() {
-  const url: string = "https://api.openbrewerydb.org/v1/breweries";
-  const { id } = useParams();
-  const { data, loading, error } = useFetchDetail<Brewery>(`${url}/${id}`);
+type Props = {
+  brewery: Brewery | undefined
+}
 
-  if (loading) {
-    return <p>Loading brewery details....</p>;
-  }
+export default function BreweryDetails(props: Props) {
+  const { brewery } = props;
+  const imageUrl: string = 'https://visitfloydva.com/wp-content/uploads/2014/06/Chateau-Morrisette-cellar.main-view.F-from-LM1.jpg'
 
-  if (error) {
-    return <p>Error: { error }</p>
-  }
-
-  if (data) {
+  if (brewery) {
     return (
-      <div>
-        <h1>{data.name}</h1>
-        <ul>
-            {Object.entries(data).map(([key, value], i) => {
-              if (key !== "name" && key !== 'id' && value) {
-                return (
-                  <li key={key}>{key}: {value}</li>
-                );  
-              }
-              return '';
-            })}
-          </ul>
-      </div>
+      <Grid container justifyContent='center'>
+        <Grid item>
+          <Card sx={{ maxWidth: 500 }}>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                height="140"
+                image={imageUrl}
+                alt="brewery_image"
+              />
+              <CardContent>
+                <Chip label={brewery.brewery_type} color={getColorByType(brewery.brewery_type)} variant="outlined" />
+                <Typography variant="body2" color="text.secondary" sx={{ my: 2 }}>
+                  {brewery.address_1} {brewery.address_2} {brewery.address_3}<br></br>
+                  {brewery.postal_code} {brewery.state} {brewery.city}<br></br>
+                  {brewery.country}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+            <CardActions>
+              <Button size="small" color="primary">
+                <Link to={brewery.website_url}>{brewery.website_url}</Link>
+              </Button>
+            </CardActions>
+        </Card>
+      </Grid>
+    </Grid>
     );
   }
 

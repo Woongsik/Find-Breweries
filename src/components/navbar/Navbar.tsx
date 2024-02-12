@@ -8,7 +8,7 @@ export default function Navbar() {
     <header>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'rgb(157 134 186)', padding: '10px' }}>
         <Typography variant="h4" sx={{ my: 1, ml:1, mr: 1 }}>
-          Breweries
+          <Link to="/home" style={{ textDecoration: 'none', color: 'white' }}>Breweries</Link>
         </Typography>
         <Divider />
         <List sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

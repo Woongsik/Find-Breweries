@@ -1,5 +1,10 @@
-.details-container {
+.details {
   display: flex;
   justify-content: center;
-  align-items: center;
+  min-height: 84vh;
+}
+
+.details__contents {
+  max-width: 35%;
+  min-width: 500px;
 }

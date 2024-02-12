@@ -3,10 +3,7 @@
   justify-content: center;
 }
 
-.home__body {
-  max-width: 45%;
-  min-width: 500px;}
-
-.home__body-title {
-  text-align: center;
+.home__contents {
+  max-width: 35%;
+  min-width: 500px;
 }

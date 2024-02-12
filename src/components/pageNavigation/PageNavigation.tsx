@@ -6,28 +6,18 @@ import {
   Select, 
   MenuItem, 
   SelectChangeEvent, 
-  Grid,
-  ButtonGroup,
-  Button
+  Grid
 } from '@mui/material';
 
 type Props = {
   changePage: Function,
   changeItemsPerPage: Function,
-  changeSort: Function,
   currentPage: number,
-  currentPerPage: number,
-  currentSort: string
+  currentPerPage: number
 }
-
-export enum Sort {
-  ASC = "asc",
-  DESC = "desc"
-}
-
 
 export default function PageNavigation(props: Props) {
-  const { currentPage, currentPerPage, currentSort } = props;
+  const { currentPage, currentPerPage } = props;
 
   const handleSelectChange = (e: SelectChangeEvent) => {
     const { value } = e.target;
@@ -64,21 +54,6 @@ export default function PageNavigation(props: Props) {
             <MenuItem value={10}>10</MenuItem>
           </Select>
         </FormControl>
-      </Grid>
-
-      <Grid item>
-        <ButtonGroup variant="contained" aria-label="Basic button group">
-          <Button 
-            onClick={() => props.changeSort(Sort.ASC)}
-            disabled={currentSort === Sort.ASC}>
-            ASC
-          </Button>
-          <Button
-            onClick={() => props.changeSort(Sort.DESC)}
-            disabled={currentSort === Sort.DESC}>
-            DESC
-          </Button>
-        </ButtonGroup>
       </Grid>
     </Grid>
   )
