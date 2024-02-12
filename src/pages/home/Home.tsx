@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import PageTitle from '../../components/pageTitle/PageTitle';
 import SearchInput from '../../components/searchInput/SearchInput';
 import BreweriesList from '../../components/breweriesList/BreweriesList';
-import PageNavigation from '../../components/pageNavigation/PageNavigation';
 import SortButtons, { Sort } from '../../components/sortButtons/SortButtons';
 import './Home.css';
 
@@ -19,9 +18,12 @@ export default function Home() {
   const [page, setPage] = useState<number>(basePage);
   const [perPage, setPerPage] = useState<number>(baseItemsPerPage);
   const [sort, setSort] = useState<Sort>(baseSort);
-  const [showPageNav, setShowPageNav] = useState<boolean>(true);
 
-  const changeUrl = (searchPhrase: string, page: number = basePage, itemsPerPage: number = baseItemsPerPage, sort: string = baseSort) => {
+  const changeUrl = (
+    searchPhrase: string = '', 
+    page: number = basePage, 
+    itemsPerPage: number = baseItemsPerPage, 
+    sort: string = baseSort) => {
     let url: string = baseUrl;
     let separator: string = '?';
 
@@ -61,26 +63,20 @@ export default function Home() {
     changeUrl(searchPhrase, page, perPage, sort);
   }
 
-  const showPageNavigation = (show: boolean) => {
-    setShowPageNav(show);
-  }
-
   return (
     <div className="home">
       <div className="home__contents">
         <PageTitle title="Breweries list" />
         <SearchInput textChanged={changeUrlByName} />
         <SortButtons 
-          changeSort={changeSort}
-          currentSort={sort} />
-        <BreweriesList url={url}
-                       showNavigation={showPageNavigation} />   
-        {showPageNav ? <PageNavigation 
-          changePage={changePage}
-          changeItemsPerPage={changeItemsPerPage}
+          currentSort={sort}
+          changeSort={changeSort} />
+        <BreweriesList 
+          url={url}
           currentPage={page}
           currentPerPage={perPage}
-           /> : ''}
+          changePage={changePage}
+          changeItemsPerPage={changeItemsPerPage} />   
       </div>
     </div>
   )

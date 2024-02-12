@@ -10,10 +10,10 @@ import {
 } from '@mui/material';
 
 type Props = {
-  changePage: Function,
-  changeItemsPerPage: Function,
   currentPage: number,
   currentPerPage: number
+  changePage: Function,
+  changeItemsPerPage: Function
 }
 
 export default function PageNavigation(props: Props) {
