@@ -70,11 +70,13 @@ export default function Home() {
   const changeSort = (sort: Sort = baseSort) => {
     console.log('change sort', sort);
     setSort(sort);
-    changeUrl(searchPhrase, page, perPage, sort, breweryType);
+    setPage(basePage)
+    changeUrl(searchPhrase, basePage, perPage, sort, breweryType);
   }
 
   const changeBreweryType = (newType: BreweryType = baseBreweryType) => {
     setBreweryType(newType);
+    setPage(basePage);
     changeUrl(searchPhrase, basePage, perPage, sort, newType);
   }
 
