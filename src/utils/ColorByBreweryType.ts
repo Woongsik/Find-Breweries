@@ -1,19 +1,15 @@
 import { BreweryType } from "../misc/types/Brewery";
 
-export const getColorByType = (type:string) => {
-  if (type === BreweryType.BrewPub) {
+export const getColorByType = (type: BreweryType) => {
+  if (type === BreweryType.brewpub) {
     return 'success';
-  } else if (type === BreweryType.Large) {
+  } else if (type === BreweryType.large) {
     return 'warning';
-  } else if (type === BreweryType.Contract) {
+  } else if (type === BreweryType.contract) {
     return 'secondary';
-  } else if (type === BreweryType.Closed) {
+  } else if (type === BreweryType.closed) {
     return 'error';
   }
 
   return 'primary';
-}
-
-export default {
-  getColorByType
 }

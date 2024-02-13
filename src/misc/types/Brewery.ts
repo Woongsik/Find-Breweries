@@ -1,9 +1,16 @@
 export enum BreweryType {
-  BrewPub = "brewpub",
-  Large = "large",
-  Contract = "contract",
-  Closed = "closed"
-} 
+  micro = "micro",
+  nano = "nano",
+  regional = "regional",
+  brewpub = "brewpub",
+  large = "large",
+  planning = "planning",
+  bar = "bar",
+  contract = "contract",
+  proprietor = "proprietor",
+  closed = "closed",
+  all = "all"
+}
 
 export type Brewery = {
   id: string;

@@ -42,14 +42,6 @@ export default function BreweriesList(props: Props) {
       </div>
     )
   }
-
-  if (!data || data.length === 0) {
-    return (
-      <div className="breweries-list">
-        <p>No data with your search! try again...</p>
-      </div>
-      )
-  }
   
   return (
     <>
@@ -75,6 +67,8 @@ export default function BreweriesList(props: Props) {
             </Card>
           </Grid>)
         }
+        {(!data || data.length === 0) ? 
+          <p>No data with your search! try again...</p> : ''}
       </Grid>
       <PageNavigation 
         currentPage={currentPage}
