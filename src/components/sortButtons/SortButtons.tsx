@@ -32,7 +32,7 @@ export default function SortButtons(props: Props) {
   };
 
   return (
-    <Grid container sx={{ justifyContent: 'right' }}>
+    <Grid container sx={{ justifyContent: 'right', alignItems: 'center' }}>
       <Grid item>
       <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
           <InputLabel id="items-sort-type-label">Sort type</InputLabel>
