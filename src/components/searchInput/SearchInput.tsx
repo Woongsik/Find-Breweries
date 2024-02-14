@@ -17,52 +17,21 @@ type Props = {
 
 export default function SearchInput(props: Props) {
   const [searchPhrase, setSearchPhrase] = useState<string>('');
-  const [taskInQue, setTaskInQue] = useState<any>(undefined);
-  
-  // debounce manually
-  const debounce = (callback: Function) => {
-    let timeout: any;
-    return (value: string, delay: number = 1000) => {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        callback(value);
-      }, delay);
-    }
-  }
 
-  const submitInputValue = (value: string) => {
-    props.textChanged(value);
-  }
-
-  /* line 37 to 42 and line 46 about debounce with useCallback  */
-  const debounced = debounce(submitInputValue);
-  // const debounced = lodash.debounce(submitInputValue, 1000);
-  
   // Optimization useCallback
-  // const debouncedCallback = useCallback((value: string) => debounced(value), []);
-
-  const setNewSearch = (value: string, delay: number = 1000) => {
-    setSearchPhrase(value);
-    // debouncedCallback(value, delay); => This is not working as expected
-
-    // Alternative
-    if (taskInQue) {
-      clearTimeout(taskInQue);
-    }
-
-    setTaskInQue(setTimeout(() => {
-      submitInputValue(value);
-    }, delay));
-  }
+  const debouce = lodash.debounce((value: string) => props.textChanged(value), 1000);
+  const debouncedFunction = useCallback(debouce, [props.textChanged]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setNewSearch(value, 1000);
+    setSearchPhrase(value);
+    debouncedFunction(value);
   }
 
   const clear = () => {
     console.log('Clear');
-    setNewSearch('', 0);
+    setSearchPhrase('');
+    props.textChanged('');
   }
 
   return (
