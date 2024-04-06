@@ -10,4 +10,4 @@ Users can see list of breweries and also search by name, also pagination and sor
 5. Deployment to Netlify
 
 ## Here the project is...
-Check the project here [FindBreweries](https://master--jovial-dango-0643e3.netlify.app/)
+Check the project here [FindBreweries](https://find-your-breweries.netlify.app)
